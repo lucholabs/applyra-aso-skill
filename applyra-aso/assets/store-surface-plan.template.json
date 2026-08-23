@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "",
+  "status": "proposed",
+  "app": {
+    "name": "",
+    "ios_app_store_id": "",
+    "android_package_name": ""
+  },
+  "apple": {
+    "app_tags": {
+      "market": "US",
+      "source_locale": "en-US",
+      "state": "unknown",
+      "selected": [],
+      "recommended_deselections": [],
+      "evidence": [],
+      "notes": ""
+    },
+    "custom_product_pages": [],
+    "product_page_optimization_tests": []
+  },
+  "google_play": {
+    "custom_store_listings": [],
+    "store_listing_experiments": []
+  },
+  "approval_required_for": [
+    "create",
+    "edit-live",
+    "submit",
+    "publish",
+    "disable",
+    "delete"
+  ]
+}

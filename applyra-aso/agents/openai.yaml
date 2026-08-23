@@ -1,0 +1,16 @@
+interface:
+  display_name: "Applyra ASO"
+  short_description: "Evidence-led iOS and Google Play ASO using Applyra data."
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/logo.png"
+  brand_color: "#12C6E8"
+  default_prompt: "Use $applyra-aso to audit and optimize this app's ASO with Applyra, starting read-only and requiring explicit authorization before any mutation or publication."
+
+policy:
+  allow_implicit_invocation: true
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "applyra"
+      description: "Applyra MCP server for app metadata, keyword ranks, traffic, difficulty, KEI, autocomplete, niche analysis, top charts, visibility history, and competitors."

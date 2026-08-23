@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "app": {
+    "name": "",
+    "ios_bundle_id": "",
+    "android_package_name": ""
+  },
+  "generated_at": "",
+  "status": "proposed",
+  "locales": {
+    "en-US": {
+      "market": {
+        "country": "US",
+        "evidence": "data-backed",
+        "notes": ""
+      },
+      "ios": {
+        "name": "",
+        "subtitle": "",
+        "keywords": "",
+        "promotional_text": "",
+        "description": "",
+        "whats_new": ""
+      },
+      "android": {
+        "title": "",
+        "short_description": "",
+        "full_description": "",
+        "release_notes": ""
+      }
+    }
+  }
+}

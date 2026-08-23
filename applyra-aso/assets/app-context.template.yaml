@@ -1,0 +1,60 @@
+app:
+  name: ""
+  ios_bundle_id: ""
+  ios_app_store_id: ""
+  android_package_name: ""
+  platforms: []
+  primary_category: ""
+  secondary_category: ""
+  stage: "draft"
+  current_version: ""
+
+audience:
+  primary: ""
+  secondary: ""
+  jobs_to_be_done: []
+  pains: []
+  desired_outcomes: []
+
+product:
+  one_sentence_value: ""
+  differentiators: []
+  verified_features: []
+  unavailable_or_future_features: []
+  offline_capabilities: []
+  integrations: []
+  monetization: ""
+  pricing: ""
+  account_required: null
+  geographic_restrictions: []
+
+localization:
+  app_locales: []
+  store_locales: []
+  priority_markets:
+    - store: "ITUNES"
+      country: "US"
+      locale: "en-US"
+
+store_surfaces:
+  apple:
+    app_tags_state: "unknown"
+    selected_app_tags: []
+    custom_product_pages: []
+    product_page_optimization_tests: []
+  google_play:
+    custom_store_listings: []
+    store_listing_experiments: []
+
+compliance:
+  vertical: ""
+  regulated_claims: []
+  third_party_services: []
+  privacy_sensitive_features: []
+  prohibited_or_unverified_claims: []
+
+sources:
+  repository_commit: ""
+  inspected_paths: []
+  live_store_checked_at: ""
+  applyra_checked_at: ""

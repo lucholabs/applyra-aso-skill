@@ -1,0 +1,20 @@
+name: Validate skill
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: python3 applyra-aso/scripts/validate_metadata.py --self-test
+      - run: python3 -m unittest discover -s applyra-aso/scripts/tests -p 'test_*.py'
+      - run: bash -n applyra-aso/scripts/check_setup.sh
