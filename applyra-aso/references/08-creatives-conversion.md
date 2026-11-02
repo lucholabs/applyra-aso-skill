@@ -4,6 +4,8 @@
 
 Turn search relevance into a qualified install. Metadata earns attention; creatives prove the promise. Keep default listings, targeted listings, and experiments as separate surfaces with separate audiences and measurement.
 
+For icon audits and preview storyboards, read [icons and previews](16-icons-previews.md). For temporary campaigns and In-App Event briefs, read [seasonal campaigns and events](17-seasonal-events.md). A focused asset brief requires only the relevant evidence and deliverable, not a complete surface inventory.
+
 ## Intent-to-creative mapping
 
 For each major keyword cluster, define:

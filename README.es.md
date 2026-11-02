@@ -12,15 +12,36 @@ rankings, competidores, metadata validada, auditorías ASO Health, simulación d
 borradores, localización, creatividades y medición de cambios con notas y
 comparaciones de eventos usando datos de Applyra.
 
+Incluye rutas breves para consultas puntuales, objetivos y recursos del negocio,
+comparación de paquetes de metadata, análisis de reseñas, seguimiento de cambios
+de competidores, briefs de iconos y previews, calendarios estacionales y briefs
+de In-App Events. Las reseñas y las métricas propias de conversión/ingresos
+necesitan una fuente disponible o una exportación. Los planes no publican ni
+programan tareas por sí solos.
+
+## Ejemplos de uso
+
+```text
+Comprueba solo este título iOS y su longitud, sin una auditoría completa.
+Compara dos paquetes de metadata protegiendo mis keywords actuales.
+Analiza esta exportación de reseñas y redacta respuestas con fixes verificados.
+Compara estas capturas fechadas de competidores y señala los cambios observados.
+Prepara un test de iconos y un storyboard localizado con pantallas reales.
+Planifica una campaña estacional para España con caducidad y reversión.
+```
+
 Empieza en modo de solo lectura. La investigación puede consumir cuota y guardar
 historial; cambiar apps, keywords, competidores o notas, publicar metadata y
 ejecutar operaciones Git requiere autorización explícita.
 
 ## Requisitos
 
-- una cuenta de Applyra: tanto Free como Unlimited permiten API/MCP;
+- para investigación ASO en vivo, una cuenta de Applyra: tanto Free como Unlimited permiten API/MCP;
 - OAuth remoto en `https://www.applyra.io/api/mcp`, o stdio local con Node.js 20+, `APPLYRA_API_KEY` y `@applyra/mcp-server@1.8.0`;
 - Python 3 para el validador de metadata incluido.
+
+La revisión de textos aportados, las exportaciones de reseñas y los briefs de
+creatividades pueden trabajarse sin conectar Applyra.
 
 Free incluye 50 peticiones API al mes y siete días de historial; cada llamada
 a una herramienta cuenta como una petición. Unlimited incluye 10.000 peticiones
@@ -154,17 +175,21 @@ variable de entorno: APPLYRA_API_KEY (heredada del shell que abre el cliente)
 
 ```bash
 python3 applyra-aso/scripts/validate_metadata.py --self-test
+python3 -m unittest discover -s applyra-aso/scripts/tests -p 'test_*.py'
 # Solo para stdio local; OAuth no necesita Node.js ni APPLYRA_API_KEY.
 bash applyra-aso/scripts/check_setup.sh
 ```
 
-Python solo ejecuta el validador determinista incluido; no es el instalador de
-Codex.
+Python ejecuta la validación de metadata y las comprobaciones del paquete;
+no es el instalador de Codex.
 
-La skill pasa a la versión **1.3.0**, revisada el **02-11-2026** con Applyra
-MCP **1.8.0** y la documentación pública actual. El validador de keywords iOS
-ahora aplica **100 caracteres**, con conteo UTF-16 y pruebas de límites con CJK
-y acentos, siguiendo la [guía de producto de Apple](https://developer.apple.com/app-store/product-page/).
+La skill pasa a la versión **1.4.0**. Los contratos de Applyra se revisaron el
+**02-11-2026** con MCP **1.8.0**. Esta versión incorpora rutas por intención,
+contexto comercial y los nuevos flujos de comparación, reseñas, seguimiento,
+creatividades y campañas. Se mantiene la validación UTF-16 y el límite de
+**100 caracteres** en keywords iOS. Las pruebas locales comprueban enlaces,
+versiones y fixtures; los [escenarios de comportamiento](applyra-aso/evals/README.md)
+se evalúan por separado. La suite no necesita acceder a una cuenta real.
 
 ## Actualizar o desinstalar
 

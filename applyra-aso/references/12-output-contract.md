@@ -4,13 +4,15 @@
 
 Every full ASO run must be inspectable later. Separate raw private evidence, normalized/redacted data, decisions, proposed copy, repository changes, and published state. Raw payloads are optional and remain ignored by default.
 
+A focused request may be answered inline with its result, evidence, applicable validation and limitations. Do not create this entire tree for a title check, review sample, asset brief or single comparison. The files below are conventions for requested saved/full work, not mandatory output for every invocation. Respect the project's established layout and the user's requested format.
+
 ## Standard files
 
 ### App context
 
 `docs/aso/context/app-context.yaml`
 
-Product truth, identifiers, markets, features, claims, locales, and sources.
+Product truth, identifiers, markets, features, claims, locales, business KPI/target/deadline, resource/release constraints and sources. Use [the context template](../assets/app-context.template.yaml); private business amounts and row-level exports stay private.
 
 ### Raw private evidence (optional)
 
@@ -73,6 +75,8 @@ Include validator version, source paths, errors, warnings, and counts.
 
 When live checks/simulations are in scope, also write `docs/aso/metadata/simulation-comparison.json` with the market, draft, baseline, assumed context, ASO Health and per-axis deltas, check warnings, request notes, lost phrases, and decision. Preserve unavailable/null values and distinguish simulated scores from observed performance. Redact unnecessary saved-run IDs and private unrelated drafts. If unavailable, record the tool, allowance or context gap in the report.
 
+For alternative packages use [the candidate comparison template](../assets/metadata-comparison.template.json), complete manifests under `docs/aso/metadata/candidates/`, and `docs/aso/metadata/candidate-comparison.json`. Select one final manifest. Keep local comparison, live check and simulation results distinct, including untested candidates. Do not duplicate unrelated saved simulations.
+
 ### Store discovery surfaces
 
 `docs/aso/surfaces/store-surface-plan.json`
@@ -84,6 +88,20 @@ Use the bundled template. Record Apple app tags, Custom Product Pages, Product P
 `docs/aso/creatives/screenshot-brief.md`
 
 One table per store/market/locale/surface.
+
+For icon/video requests use [the creative brief template](../assets/creative-brief.template.md), saving only the relevant `docs/aso/creatives/icon-brief.md` or `preview-storyboard.md`. Label concepts, planned footage and rendered assets separately.
+
+### Reviews, monitoring and seasonal work
+
+Only for the selected task:
+
+| Task | Saved outputs | Reference/template |
+|---|---|---|
+| Review analysis/rating strategy | `docs/aso/reviews/review-findings.csv`, `review-plan.md` in that directory | [Reviews](14-reviews-ratings.md), [findings CSV](../assets/review-findings.template.csv) |
+| Competitor monitoring | `docs/aso/data/<date>/competitor-snapshot.json`, `docs/aso/reports/<date>-competitor-update.md` | [Monitoring](15-competitor-monitoring.md), [snapshot](../assets/competitor-snapshot.template.json) |
+| Seasonal campaign/event | `docs/aso/campaigns/seasonal-calendar.csv`, `event-brief.md` in that directory | [Campaigns](17-seasonal-events.md), [calendar](../assets/seasonal-calendar.template.csv), [brief](../assets/event-brief.template.md) |
+
+Each output includes scope, dated sources, sample/coverage limits, proposed actions and unknowns. Save raw reviews privately and publish only minimized aggregates. A snapshot without a comparable predecessor establishes a baseline; it is not a measured change. Calendar entries and planned reports do not imply a running schedule or published event.
 
 ### Experiments
 
@@ -98,68 +116,7 @@ For before/after analysis, include normalized `compare_events` results in `docs/
 
 ## Audit report template
 
-```md
-# ASO Audit — <App> — <Date>
-
-## Scope
-- Stores:
-- Markets:
-- Locales:
-- Mode:
-- Repository commit:
-- Applyra observation time:
-
-## Executive summary
-- Largest discoverability constraint:
-- Largest conversion constraint:
-- Highest-confidence opportunity:
-- Highest-risk assumption:
-
-## Baseline
-| Metric | Store | Market | Value | Period | Source |
-|---|---|---|---:|---|---|
-
-## Listing health and simulated drafts
-
-| Market | Draft | ASO Health / axes | Context | Lost phrases | Decision |
-|---|---|---|---|---|---|
-
-Keep observed visibility, listing assessment, and simulated scores distinct.
-
-## Keyword strategy
-| Cluster | Intent | Evidence | Bucket | Destination | Confidence |
-|---|---|---|---|---|---|
-
-## Competitor gaps
-| Competitor | Type | Gap | Evidence | Action |
-|---|---|---|---|---|
-
-## Metadata
-| Locale | Platform | Field | Status | Validation |
-|---|---|---|---|---|
-
-## Store discovery surfaces
-| Store | Surface | Audience/target | State | Evidence | Action |
-|---|---|---|---|---|---|
-
-## Creatives
-| Intent | Frame | Proof | Experiment |
-|---|---|---|---|
-
-## Priority plan
-| Priority | Action | Impact | Confidence | Effort | Validation |
-|---|---|---:|---:|---:|---|
-
-## Data gaps and assumptions
-
-## Changes made
-
-## Changes not made
-
-## Measurement plan
-
-## Needs approval
-```
+Use [the canonical audit report template](../assets/aso-report.template.md). Omit optional sections outside scope rather than filling them with invented data or empty approval requests.
 
 ## Data provenance
 

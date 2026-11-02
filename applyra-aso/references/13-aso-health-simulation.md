@@ -21,7 +21,7 @@ Sources: [ASO Health](https://www.applyra.io/docs/concepts/aso-health), [officia
 
 ## Check before scoring
 
-1. Run the bundled validator on the complete manifest.
+1. Run the bundled validator on a complete package manifest, or use its platform validation function for supplied partial fields. The manifest CLI intentionally requires complete platform fields.
 2. When connected and budget permits, call `check_metadata` on each candidate using `store`, `title`, `subtitle`, `description`, and iOS-only `kw_field` as applicable. Map manifest `name`/`short_description`/`full_description` to those API fields.
 3. Resolve errors and read warnings even when `valid: true`. Preserve rule and severity; Apple and Google can treat the same promotional wording differently. This check does not prove App Review approval or product truth.
 4. Only then use a simulation allowance on a meaningful candidate.
@@ -31,6 +31,18 @@ The checker reports UTF-16 lengths, formatting/policy findings, and keyword diag
 The iOS keyword field allows 100 characters including separators, following [Apple’s product-page guide](https://developer.apple.com/app-store/product-page/) and Applyra’s checker. Use UTF-16 units; CJK and accented letters do not consume their UTF-8 byte length. Apple’s platform-version reference still says bytes, so cite the product-page guidance when explaining this correction.
 
 ## Simulate with comparable context
+
+### Candidate packages
+
+Recommend one package by default. When alternatives resolve a real tradeoff, add up to two: for example, protect existing intent, explore an evidenced keyword cluster, or emphasize a different verified benefit. Give each package one hypothesis and keep the complete fields together per platform/market. Do not assemble a final listing by independently picking the highest-scoring field from each package; revalidate the final combination.
+
+Use [the candidate comparison template](../assets/metadata-comparison.template.json). For full packages, keep each candidate in its own complete metadata manifest under `docs/aso/metadata/candidates/` and validate it with the existing CLI. Only the chosen package becomes `metadata-manifest.json`. A single-field request can compare the supplied field inline and validate it through the platform validation function; do not invent the remaining fields to satisfy the manifest schema.
+
+For each package record exact text or manifest reference, hypothesis, UTF-16 counts and limits, keyword-to-field coverage, protected/new/lost phrases, product evidence, validation warnings, comparable context and reason to choose or reject it. Distinguish literal token presence, inferred phrase coverage and coverage reported by Applyra; do not imply every possible word combination is indexed.
+
+Compare alternatives locally before spending allowance. Reuse relevant saved runs; check/simulate only decision-relevant candidates within the account's remaining budget. Three written options do not authorize three simulations. When checks or simulations are unavailable, keep their results null with a reason and choose provisionally using product fit, protected phrases, readability and validation. Never score an untested candidate as zero or promise rank/install gains.
+
+### Simulation procedure
 
 Reuse `list_metadata_simulations` and `get_metadata_simulation` before spending another run. The list carries draft titles and scores; only the detail tool returns all four fields and the assumed context.
 

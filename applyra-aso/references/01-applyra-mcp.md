@@ -66,6 +66,8 @@ The MCP server may annotate quota-affecting research tools as mutations because 
 
 ## Call selection
 
+Use this sequence only when the selected task needs Applyra data. Supplied-copy validation, review exports and asset-only briefs do not require an account lookup or API call. If usage reports no remaining API requests, stop all further calls, including baseline reads, and continue with dated saved/user evidence. Clearly label its age and limits.
+
 1. `get_account_usage`
 2. `list_applications`
 3. Resolve app internal ID
@@ -122,6 +124,10 @@ For a confirmed rate-limit rejection, wait at least the longer of `Retry-After`,
 Do not retry other 429 codes such as `QUOTA_EXCEEDED` or an exhausted research allowance: time-based throttling cannot restore monthly quota. Keep the separate one-retry rule for a structured `busy: true` refusal.
 
 Source: [Applyra rate limits and response headers](https://www.applyra.io/docs/api/errors-and-limits). The 1.1-second interval and bounded retry policy are this skill's conservative defaults.
+
+## Capability boundaries
+
+The tool map above covers Applyra MCP 1.8.0; discover live schemas before assuming a newer capability. There is no dedicated review-text, first-party installs/revenue/conversion, trending-query feed, historical search-volume, competitor asset-history, publishing or scheduling tool in this map. Review/export analysis and campaign planning remain useful without those capabilities. Use an authorized store/product analytics source or supplied export for missing data; keep estimates separate from observed first-party metrics and never fabricate a tool name.
 
 ## Candidate deduplication
 

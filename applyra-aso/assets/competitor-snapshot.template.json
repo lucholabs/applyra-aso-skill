@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "retrieved_at": "",
+  "store": "",
+  "country": "",
+  "locale": "",
+  "requested_dimensions": [],
+  "apps": [
+    {
+      "store_identifier": "",
+      "relationship": "direct",
+      "observations": [
+        {
+          "dimension": "title",
+          "scope": {},
+          "value": null,
+          "status": "unknown",
+          "source": "",
+          "observed_at": null,
+          "retrieved_at": "",
+          "limitation": ""
+        }
+      ]
+    }
+  ]
+}

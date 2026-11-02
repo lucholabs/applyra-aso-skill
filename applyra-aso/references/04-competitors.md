@@ -4,6 +4,8 @@
 
 Find discoverability and conversion gaps without copying competitors or mistaking category leaders for true substitutes.
 
+For changes over time, read [competitor monitoring](15-competitor-monitoring.md). For review-derived positioning hypotheses, read [reviews and ratings](14-reviews-ratings.md). A one-time gap analysis does not establish a competitor trend.
+
 ## Competitor classes
 
 Classify each app:

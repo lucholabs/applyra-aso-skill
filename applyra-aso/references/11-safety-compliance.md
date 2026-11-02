@@ -88,6 +88,8 @@ Check age rating, parental controls, ads, data collection, social features, and 
 
 ## Review gate
 
+For rating-request strategies use [reviews and ratings](14-reviews-ratings.md): native prompts, neutral usage criteria, no satisfaction pre-screening, incentives or filtering negative reviewers away from store ratings. Do not promise star increases or infer an individual user's submitted rating from a prompt request.
+
 Before finalizing high-risk metadata, create:
 
 ```text

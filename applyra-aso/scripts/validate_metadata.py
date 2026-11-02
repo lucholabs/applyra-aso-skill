@@ -33,7 +33,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 
 IOS_LIMITS = {
     "name": ("chars", 30),

@@ -28,6 +28,35 @@ product:
   account_required: null
   geographic_restrictions: []
 
+goals:
+  primary:
+    objective: ""
+    metric: ""
+    definition: ""
+    store: ""
+    country: ""
+    locale: ""
+    baseline: null
+    baseline_period: ""
+    target: null
+    deadline: ""
+    source: ""
+  guardrail_metrics: []
+
+resources:
+  # Keep private amounts local; publish only approved summaries or references.
+  marketing_budget:
+    amount: null
+    currency: ""
+    period: ""
+  team_capacity: ""
+  design_support: ""
+  localization_support: ""
+  analytics_sources: []
+  release_calendar: []
+  review_lead_time: "unknown"
+  constraints: []
+
 localization:
   app_locales: []
   store_locales: []

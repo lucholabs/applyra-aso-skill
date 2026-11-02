@@ -22,8 +22,8 @@ Trace how metadata is generated and published before editing.
 
 ## Write policy
 
-- In `audit` or `research` mode, write normalized/redacted reports under the established ASO documentation path; keep raw private payloads under ignored `.aso-private/`.
-- In `prepare` mode, write a manifest and proposed files, not live metadata paths, unless requested.
+- For saved/full `audit` or `research` work, write normalized/redacted reports under the established ASO documentation path; keep raw private payloads under ignored `.aso-private/`. Focused answers may stay inline.
+- In `prepare` mode, write the requested manifest/brief/proposed files, not live metadata paths, unless requested. An inline field check does not require a complete manifest.
 - In `implement` mode, update the established metadata files and keep a machine-readable manifest.
 - Preserve formatting, line endings, locale codes, and generated-file rules.
 - Do not edit generated files when the generator source exists.

@@ -1,5 +1,7 @@
 # ASO Audit — <App> — <Date>
 
+Use for full audits. Omit optional sections outside the requested scope.
+
 ## Scope
 
 - Stores:
@@ -20,6 +22,13 @@
 
 | Metric | Store | Market | Value | Period | Source |
 |---|---|---|---:|---|---|
+
+## Business goal and constraints
+
+| Primary KPI and definition | Baseline/period | Target/deadline | Source | Capacity/release constraints |
+|---|---|---|---|---|
+
+Targets are objectives, not predicted outcomes. Keep private commercial figures private.
 
 ## Listing health and simulated drafts
 
@@ -57,6 +66,13 @@ Keep observed visibility, listing assessment, and simulated scores distinct.
 
 | Priority | Action | Impact | Confidence | Effort | Validation |
 |---|---|---:|---:|---:|---|
+
+## Optional specialist findings
+
+Include only when requested or material to the audit: review sample/themes and
+verified fixes, comparable competitor changes, icon/preview briefs, or seasonal
+campaign/event eligibility, expiry and rollback. Link the relevant artifacts;
+mark missing data unknown. Planned work is not published or scheduled work.
 
 ## Data gaps and assumptions
 

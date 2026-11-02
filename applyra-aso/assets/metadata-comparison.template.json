@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "store": "",
+  "country": "",
+  "locale": "",
+  "observed_at": "",
+  "baseline_source": "",
+  "primary_kpi": "",
+  "protected_phrases": [],
+  "candidates": [
+    {
+      "id": "recommended",
+      "hypothesis": "",
+      "manifest_path": "",
+      "field_counts": [],
+      "keyword_field_coverage": [],
+      "new_phrases": [],
+      "lost_phrases": [],
+      "product_evidence": [],
+      "validation": {"status": "unknown", "report_path": "", "warnings": []},
+      "check": null,
+      "simulation": null,
+      "unavailable_reason": "",
+      "assumed_context": null,
+      "decision": "proposed",
+      "rationale": ""
+    }
+  ],
+  "selected_candidate": null,
+  "selection_reason": "",
+  "measurement_plan": ""
+}

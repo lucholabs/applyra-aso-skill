@@ -14,6 +14,23 @@ Claude Code, and compatible agents with:
 - validated App Store and Google Play metadata, ASO Health audits and draft simulation;
 - localization, screenshot briefs, and conversion experiments;
 - chart notes, event comparisons, and measurable keep/iterate/rollback plans.
+- focused routes for single-field questions and comparable metadata candidates;
+- review-export analysis, rating strategy, dated competitor comparisons;
+- icon/preview briefs, local seasonal calendars, and In-App Event briefs.
+
+Reviews and first-party store/product analytics need an available source or export;
+Applyra supplies ASO metrics. Briefs and calendars do not publish or schedule work.
+
+## Example requests
+
+```text
+Check only this iOS title and its character count; no full audit.
+Compare two metadata packages while protecting my existing keyword phrases.
+Analyze this review export and draft replies backed by verified fixes.
+Compare these competitor snapshots and list only observable changes.
+Brief an icon test and a localized app-preview storyboard using my real UI.
+Plan a seasonal campaign for Spain with expiry dates and rollback values.
+```
 
 It starts read-only. Budgeted research may consume allowance and save history;
 changes to tracked apps, keywords, competitors or notes, store publication, and
@@ -21,9 +38,11 @@ Git operations require explicit authorization.
 
 ## Requirements
 
-- an Applyra account: Free and Unlimited both support API/MCP;
+- for live ASO research, an Applyra account: Free and Unlimited both support API/MCP;
 - hosted OAuth at `https://www.applyra.io/api/mcp`, or local stdio with Node.js 20+, `APPLYRA_API_KEY`, and `@applyra/mcp-server@1.8.0`;
 - Python 3 for the bundled metadata validator.
+
+Supplied-copy checks, review exports and asset briefs can run without Applyra.
 
 Free includes 50 API requests/month and seven days of history; every tool call
 counts as one request. Unlimited includes 10,000 API requests/month. The skill
@@ -161,17 +180,21 @@ environment variable: APPLYRA_API_KEY (inherit it from the launching shell)
 
 ```bash
 python3 applyra-aso/scripts/validate_metadata.py --self-test
+python3 -m unittest discover -s applyra-aso/scripts/tests -p 'test_*.py'
 # Local stdio only; OAuth does not need Node.js or APPLYRA_API_KEY.
 bash applyra-aso/scripts/check_setup.sh
 ```
 
-Python only runs the bundled deterministic metadata validator. It is not the
-Codex installer.
+Python runs the bundled metadata validator and offline package checks. It is
+not the Codex installer.
 
-The skill is version **1.3.0**, reviewed on **2026-11-02** against Applyra MCP
-**1.8.0** and current public docs. The iOS keyword validator now enforces
-**100 characters**, with UTF-16 counting and CJK/accented-text boundary tests,
-following [Apple’s product-page guide](https://developer.apple.com/app-store/product-page/).
+The skill is version **1.4.0**. Applyra contracts were reviewed on **2026-11-02**
+against MCP **1.8.0**. This release adds intent routing, business goals, candidate
+comparison, reviews, monitoring, creative briefs, and seasonal/event planning.
+Metadata validation retains UTF-16 counting, including the **100-character** iOS
+keyword field. Offline package checks cover resource links, versions and fixtures;
+[behavior scenarios](applyra-aso/evals/README.md) are evaluated separately from
+those deterministic checks. No live account access is needed to run the suite.
 
 ## Update or uninstall
 
@@ -187,6 +210,7 @@ applyra-aso/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── assets/
+├── evals/
 ├── references/
 └── scripts/
 ```

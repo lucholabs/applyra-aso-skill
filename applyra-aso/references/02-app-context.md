@@ -28,57 +28,17 @@ Do not infer functionality from filenames alone. Trace the user flow or implemen
 
 ## Required context fields
 
-Write `docs/aso/context/app-context.yaml` with:
+For a full run, write `docs/aso/context/app-context.yaml` using [the canonical context template](../assets/app-context.template.yaml). Reuse existing context and preserve extra project fields. For a focused question, inspect only the product and market facts needed to answer it; no context file is required.
 
-```yaml
-app:
-  name:
-  ios_bundle_id:
-  ios_app_store_id:
-  android_package_name:
-  platforms: []
-  primary_category:
-  secondary_category:
-  stage: draft|prelaunch|live
-  current_version:
+The template covers app identity/stage, audience/jobs, implemented and unavailable features, monetization, markets/locales, store surfaces, compliance, business goals, resources and dated sources. An app repository is useful evidence, not a prerequisite. Without one, use user-provided product facts, a live demo, store listings or official product documentation; label the evidence level and ask only about claims whose ambiguity changes the result. Do not treat a competitor listing as proof of the target app's features.
 
-audience:
-  primary:
-  secondary:
-  jobs_to_be_done: []
-  pains: []
-  desired_outcomes: []
+## Business goals and constraints
 
-product:
-  one_sentence_value:
-  differentiators: []
-  verified_features: []
-  unavailable_or_future_features: []
-  offline_capabilities: []
-  integrations: []
-  monetization:
-  pricing:
-  account_required:
-  geographic_restrictions: []
+Capture the primary goal with metric name, definition/denominator, store/market, baseline and period, target and deadline, and evidence source. Treat a user target as an objective, not a forecast. If unavailable, keep the baseline/target null and propose what to measure.
 
-localization:
-  app_locales: []
-  store_locales: []
-  priority_markets: []
+Capture available budget and currency, team capacity, design/localization support, analytics sources, release schedule, review lead time and other constraints. Keep private commercial figures in ignored local evidence or the user's established private workspace; a public context file should contain only approved summaries or private references.
 
-compliance:
-  vertical:
-  regulated_claims: []
-  third_party_services: []
-  privacy_sensitive_features: []
-  prohibited_or_unverified_claims: []
-
-sources:
-  repository_commit:
-  inspected_paths: []
-  live_store_checked_at:
-  applyra_checked_at:
-```
+Use these inputs to choose work: a solo developer with no designer may need a copy fix before a new preview; low traffic may favor one coherent candidate over a multi-treatment test. Select one primary KPI per decision, with quality guardrails. Do not infer installs or revenue from visibility. If the user already supplied these facts, reuse them rather than repeating an intake interview.
 
 ## Claim-evidence matrix
 

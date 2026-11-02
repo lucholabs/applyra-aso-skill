@@ -17,6 +17,8 @@ Do not use Applyra visibility as a substitute for conversion, retention, or reve
 
 ## Baseline
 
+For a focused measurement question, collect only the baseline/metric required by that question. Full campaign or listing experiments should use the primary KPI and resource constraints in app context; keep target outcomes distinct from forecasts. A proposed checkpoint or weekly competitor report is not a scheduled automation.
+
 Before changing metadata, tags, targeted pages, or creatives, save:
 
 - Timestamp and repository commit

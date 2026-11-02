@@ -1,0 +1,52 @@
+{
+  "synthetic": true,
+  "app": {
+    "name": "PocketTrail",
+    "ios_bundle_id": "example.pockettrail.app",
+    "platforms": ["ios"],
+    "store": "ITUNES",
+    "country": "ES",
+    "locale": "es-ES",
+    "verified_features": ["Guardar rutas a pie", "Consultar rutas guardadas sin conexión"],
+    "unavailable_features": ["Navegación por voz", "Alertas de rescate"],
+    "product_source": "Fictional supplied product specification, 2026-11-02"
+  },
+  "business": {
+    "primary_metric": "store conversion to first-time download",
+    "baseline": null,
+    "target": null,
+    "team_capacity": "Solo developer, two hours per week",
+    "design_support": "No dedicated designer",
+    "release_calendar": ["2026-11-18"]
+  },
+  "manifests": {
+    "current": {
+      "schema_version": "1.0",
+      "status": "observed",
+      "locales": {
+        "es-ES": {
+          "ios": {
+            "name": "PocketTrail: Rutas a pie",
+            "subtitle": "Tus caminos sin conexión",
+            "keywords": "senderismo,paseos,excursiones",
+            "description": "Guarda rutas a pie y consulta tus rutas guardadas sin conexión."
+          }
+        }
+      }
+    },
+    "alternative": {
+      "schema_version": "1.0",
+      "status": "proposed",
+      "locales": {
+        "es-ES": {
+          "ios": {
+            "name": "PocketTrail: Senderismo",
+            "subtitle": "Guarda tus rutas a pie",
+            "keywords": "caminos,paseos,excursiones",
+            "description": "Guarda rutas a pie y consulta tus rutas guardadas sin conexión."
+          }
+        }
+      }
+    }
+  }
+}

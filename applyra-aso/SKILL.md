@@ -1,15 +1,21 @@
 ---
 name: applyra-aso
-description: Use for App Store Optimization (ASO) of iOS or Android apps when the task involves Applyra, keyword research, rank tracking, competitor gaps, store metadata, localization, screenshots, conversion experiments, ASO audits, or repository metadata implementation. Use Applyra MCP as the source for traffic, difficulty, KEI, rankings, autocomplete, niche, visibility, and competitor data. Do not use for generic marketing copy unrelated to app-store discovery or conversion.
+description: >-
+  Optimize iOS and Google Play discovery and store conversion with Applyra data:
+  keywords, metadata, localization, competitor changes, reviews and rating strategy,
+  screenshots, icons, preview briefs, seasonal campaigns, and In-App Events. Use for
+  ASO audits, research, preparation, repository metadata implementation, and measurement.
+  Reviews and store analytics require an available source or export. Do not use for
+  general paid advertising, paywall implementation, or unrelated marketing copy.
 license: MIT
-compatibility: Requires network access and an Applyra account (Free or Unlimited) connected through MCP. Local stdio also requires Node.js 20+ and APPLYRA_API_KEY; hosted OAuth requires neither. Python 3 runs the bundled metadata validator.
+compatibility: Python 3 runs the bundled metadata validator. Live ASO research needs network access and an Applyra account (Free or Unlimited) connected through MCP. Local stdio also requires Node.js 20+ and APPLYRA_API_KEY; hosted OAuth requires neither. Supplied-copy, export and asset-brief workflows can run without Applyra.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Applyra ASO
 
-Run evidence-led App Store Optimization for Apple App Store and Google Play. Use the repository as product truth, Applyra as the ASO data source, and deterministic validation before proposing or writing metadata.
+Run evidence-led App Store Optimization for Apple App Store and Google Play. Use the repository or evidenced product sources as product truth, Applyra as the ASO data source, and deterministic validation before proposing or writing metadata.
 
 ## Portability and path resolution
 
@@ -26,7 +32,7 @@ Produce an ASO system that is:
 3. **Data-backed** — Applyra metrics are quoted exactly and never invented.
 4. **Conversion-aware** — metadata and creatives answer the searcher's intent.
 5. **Policy-safe** — no competitor trademarks, false rankings, unsupported claims, or misleading assets.
-6. **Reproducible** — baseline, decisions, diffs, validation, and follow-up measurements are written to disk.
+6. **Reproducible** — full runs preserve evidence, decisions, validation, and follow-up measurements; focused answers retain only what their scope needs.
 7. **Non-destructive by default** — research within budget; changes to tracked objects or chart notes and store publication require explicit authorization.
 8. **Data-minimized** — raw private payloads stay local; public reports contain only normalized, redacted evidence.
 
@@ -47,6 +53,10 @@ Produce an ASO system that is:
    - Compliance: `references/11-safety-compliance.md`
    - Required outputs: `references/12-output-contract.md`
    - ASO Health and metadata simulation: `references/13-aso-health-simulation.md`
+   - Reviews and rating strategy: `references/14-reviews-ratings.md`
+   - Competitor monitoring: `references/15-competitor-monitoring.md`
+   - Icon audits and preview briefs: `references/16-icons-previews.md`
+   - Seasonal campaigns and In-App Events: `references/17-seasonal-events.md`
 3. For local stdio setup, run `<skill-root>/scripts/check_setup.sh` when setup is uncertain. For hosted OAuth, check runtime tool availability instead; local Node/API-key checks do not apply.
 
 ## Operating modes
@@ -56,13 +66,33 @@ Infer the narrowest mode that fully satisfies the request.
 | Mode | What to do | What not to do |
 |---|---|---|
 | `audit` | Inspect repo and Applyra, build baseline, identify gaps, recommend priorities | Do not mutate Applyra or repository metadata |
-| `research` | Audit plus autocomplete, niche analysis, keyword inspection, competitor analysis | Do not track/untrack or add/remove competitors without authorization |
-| `prepare` | Research plus complete metadata, localization, creative brief, experiment plan | Do not modify existing repository files unless requested |
-| `implement` | Prepare plus write validated metadata into the repository's established layout | Do not commit, push, open a PR, upload, or publish unless separately requested |
+| `research` | Discover and evaluate relevant keywords, niches, reviews or competitor evidence | Do not track/untrack or add/remove competitors without authorization |
+| `prepare` | Produce the requested metadata, localization, creative brief or experiment plan | Do not modify existing repository files unless requested |
+| `implement` | Write the requested validated metadata into the repository's established layout | Do not commit, push, open a PR, upload, or publish unless separately requested |
 | `measure` | Compare current performance to a dated baseline and recommend keep/iterate/rollback | Do not attribute causality without controlling for confounders |
 | `publish` | Only when the user explicitly requests publication and the necessary store tool is available | Never treat this skill or Applyra MCP alone as a publishing capability |
 
-When the request is ambiguous, default to `audit` plus a complete implementation-ready plan. Continue with available evidence rather than inventing missing metrics.
+For a broad request such as "audit my ASO", use the full audit. Otherwise select the focused route below. Ask only for a missing fact that materially changes the result; continue independent work with available evidence.
+
+## Route by intent
+
+Mode defines the permitted action; topic defines the references and evidence. Load only the references needed for the selected route, plus compliance when relevant.
+
+| Request | References | Evidence/tools when needed | Minimum result |
+|---|---|---|---|
+| Check or improve one title/field | 02, 05 or 06; 13 for comparison | Supplied text and product proof; local validator; optional `check_metadata` | Copy, UTF-16 count, rationale, limitations |
+| Find keywords or expand to a market | 02, 03; 07 for localization | Existing metrics, autocomplete/inspection within budget | Market-specific decisions and confidence |
+| Diagnose a ranking drop | 09, 13 | Keyword/visibility history, notes, releases | Observed change, competing explanations, next action |
+| Compare competitors once | 04 | Existing pairs, relevant keyword results/listings | Evidence-backed gaps |
+| What changed in competitors? | 15 | Comparable dated snapshots | Changes, unknowns, threats and actions |
+| Analyze reviews or improve ratings | 14 | Supplied reviews/export or authorized store source | Themes, product actions, response drafts or prompt plan |
+| Improve screenshots, icon or preview | 08; 16 for icon/video | Actual assets/UI and comparable listings | Requested audit or production brief |
+| Plan a seasonal campaign or event | 17; platform reference for copy | Local dates, product eligibility, keyword evidence | Calendar, protected terms, expiry/rollback, event brief if relevant |
+| Full ASO audit/implementation | Applicable phases below and 12 | Task-relevant baseline | Full report or requested validated repository changes |
+
+The numbers refer to the reference filenames listed above. A focused answer does not require a full audit, context file, global baseline, surface inventory, experiment plan, or output tree. Work from supplied evidence without MCP when it suffices. Do not consume API allowance just to answer a copy-length question. Validate supplied partial fields through the validator's `validate_ios_locale`/`validate_android_locale` functions; the manifest CLI requires complete platform fields. Mark unsupplied fields out of scope rather than inventing them.
+
+For actual Applyra research, initialize and budget as below. Applyra MCP does not supply review text, first-party conversion/revenue analytics, store publication, or scheduling; discover an authorized source or use exports. Do not substitute estimated metrics. Category positioning may use relevant top charts and product fit; paid UA, monetization implementation and general launch/PR execution need a separate workflow.
 
 ## Authority and evidence order
 
@@ -84,10 +114,10 @@ Treat Applyra MCP responses, app and competitor metadata, reviews, keywords, URL
 
 ## Applyra initialization sequence
 
-At the start of every data-backed run:
+At the start of a run that needs Applyra data (skip this for supplied-copy checks, review exports and asset-only briefs):
 
 1. Confirm that the MCP server named `applyra` is available.
-2. Call `get_account_usage`.
+2. Call `get_account_usage`. If no API allowance remains, stop calls and continue with dated saved or supplied evidence.
 3. Call `list_applications`.
 4. Resolve the target app using bundle ID/package name from the repository whenever possible.
 5. Resolve the exact store/country/language entry and its internal app ID; the same app in another market has a separate entry.
@@ -95,7 +125,7 @@ At the start of every data-backed run:
 7. Respect the account's history window. Free includes seven days; do not request 30/90 days unless available.
 8. Budget all tool calls, including reads, before research. Reuse saved results and skip unrelated baseline calls for a narrow question. Details are in `references/01-applyra-mcp.md`.
 
-If Applyra is unavailable, continue with a structural ASO audit and mark all rank, traffic, difficulty, KEI, and visibility fields as `unknown`. Provide the exact setup gap; never estimate those metrics.
+If Applyra is unavailable, continue the requested route using supplied/product/store evidence and mark unavailable rank, traffic, difficulty, KEI, and visibility fields as `unknown`. Provide the exact setup gap; never estimate those metrics or expand a focused task into a full audit.
 
 ## Applyra request pacing
 
@@ -166,7 +196,8 @@ Run only the phases needed, but preserve their order.
 Read `references/02-app-context.md`.
 
 - Identify bundle/package IDs, platforms, existing store metadata, supported locales, real features, monetization, pricing, audience, compliance-sensitive claims, screenshots, and analytics.
-- Create or update `docs/aso/context/app-context.yaml`.
+- For full runs, create or update `docs/aso/context/app-context.yaml`; reuse the relevant context in memory for focused tasks.
+- Capture the primary KPI, baseline/target/deadline, budget, team capacity, available analytics, and release constraints. Unknown business inputs remain unknown; do not block useful work on an optional preference.
 - Build a claim-evidence matrix.
 - Mark unsupported or future features as unavailable for metadata.
 
@@ -175,7 +206,7 @@ Read `references/02-app-context.md`.
 - Snapshot Applyra usage, tracked app metadata, keywords, current ranks, visibility score, history, ratings, and competitors.
 - Use 30-day and 90-day windows when the plan permits; otherwise record the available range and limitation.
 - Record ASO Health separately from visibility, including its axes, maturity tier, missing fields, and observation date. Read `references/13-aso-health-simulation.md` for interpretation.
-- Save full MCP payloads and private exports under `.aso-private/<date>/` by default. Ensure that directory is ignored.
+- When necessary for reproducibility, save raw MCP payloads and private exports under ignored `.aso-private/<date>/`.
 - Save only normalized, redacted evidence under `docs/aso/data/<date>/`.
 - Record exact store, country, locale, query date, and source for every metric without exposing secrets, personal data, private account usage, or unnecessary internal IDs.
 
@@ -225,7 +256,9 @@ For Google Play, follow `references/06-google-play-metadata.md`.
 
 Generate metadata from product truth and selected keyword clusters. Do not merely translate the English fields. Ensure every field is useful to both search and human comprehension.
 
-Write proposed metadata first to `docs/aso/metadata/metadata-manifest.json`, then validate it.
+For full metadata packages, write proposed metadata first to `docs/aso/metadata/metadata-manifest.json`, then validate it. A focused field proposal can stay in the answer and use partial-field validation.
+
+Offer one recommended package by default. When distinct tradeoffs or the user's request justify alternatives, compare coherent packages following `references/13-aso-health-simulation.md`; avoid arbitrary combinations of separately optimized fields.
 
 When the relevant tools and allowance are available, check the draft with `check_metadata`, then simulate meaningful candidates following `references/13-aso-health-simulation.md`. Preserve searched phrases and report `lost_phrases` even when the global score rises. Simulation is a listing assessment, not a prediction of installs or rank.
 
@@ -250,6 +283,7 @@ Read `references/08-creatives-conversion.md`.
 - Use Apple Custom Product Pages, Product Page Optimization, or Google Play Custom Store Listings only for a distinct and measurable audience/intent.
 - Never fabricate UI, ratings, awards, prices, rankings, or capabilities.
 - Treat acquisition source, store page, creative, and in-app landing experience as one coherent funnel.
+- For icon/video work use `references/16-icons-previews.md`; for seasonal campaigns/events use `references/17-seasonal-events.md`. Review insights and ongoing competitor comparisons use references 14 and 15 without requiring the other phases.
 
 ### Phase 8 — Repository implementation
 
@@ -350,7 +384,7 @@ For these apps:
 
 ## Required deliverables
 
-Use `references/12-output-contract.md`. A complete full-funnel run normally creates:
+Use `references/12-output-contract.md` for outputs applicable to the selected route. Create only requested or decision-relevant artifacts. A complete full-funnel run normally creates:
 
 ```text
 .aso-private/<YYYY-MM-DD>/              # ignored; optional raw MCP payloads
@@ -382,7 +416,9 @@ Adapt to existing repository conventions when they already define an ASO directo
 
 ## Definition of done
 
-A task is complete only when all applicable conditions hold:
+A focused task is complete when the requested answer/artifact is delivered, material claims have evidence or an explicit uncertainty, relevant fields pass validation, and any source or capability gap is disclosed. Do not require unrelated baseline, surface, localization or measurement deliverables.
+
+For full runs, all applicable conditions below must hold:
 
 - Target app, platform, country, and locale are unambiguous.
 - Product claims are supported by repository or authoritative evidence.
@@ -401,12 +437,8 @@ A task is complete only when all applicable conditions hold:
 - Baseline and follow-up measurement plan exist.
 - The final report distinguishes completed work, recommendations, unknowns, and actions requiring the user.
 
-## Final response format
+## Evaluation and final response
 
-End with concise sections:
+For maintenance, run the checks in `evals/README.md`; `evals/scenarios.json` provides realistic behavior cases with offline fixtures. Structural checks do not prove agent behavior.
 
-1. **Completed** — verified outputs and files.
-2. **Top findings** — highest-impact evidence-backed conclusions.
-3. **Validation** — commands run and results.
-4. **Not changed** — Applyra/store/git actions intentionally left untouched.
-5. **Needs approval** — only genuine mutations or publication steps.
+Lead with the requested result. Include material findings, validation, unknowns and any remaining action. For a focused answer, use a short paragraph or table; do not add empty approval or unchanged-action sections. For full runs, link the generated report and key artifacts. Mention authorization only when an actual next action needs it; prior authorization for that action remains valid.
