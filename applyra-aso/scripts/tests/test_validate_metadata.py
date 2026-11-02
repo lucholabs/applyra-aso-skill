@@ -97,16 +97,38 @@ class MetadataValidatorTests(unittest.TestCase):
         )
         self.assertTrue(any(i.code == "invalid_field_type" for i in result.errors))
 
-    def test_apple_keywords_use_utf8_bytes(self):
-        result = self.result()
-        vm.validate_ios_locale(
-            result,
-            "ja",
-            {"name": "テスト", "keywords": "検索語" * 12},
-            source="unit",
-            forbidden_terms=[],
-        )
-        self.assertTrue(any(i.code == "bytes_limit" for i in result.errors))
+    def test_apple_keywords_use_characters_including_cjk_and_accents(self):
+        for char in ("語", "é", "a"):
+            for count in (99, 100, 101):
+                with self.subTest(char=char, count=count):
+                    result = self.result()
+                    vm.validate_ios_locale(
+                        result,
+                        "ja",
+                        {"keywords": char * count},
+                        source="unit",
+                        forbidden_terms=[],
+                    )
+                    self.assertEqual(count > 100, bool(result.errors))
+                    if result.errors:
+                        self.assertEqual("chars_limit", result.errors[0].code)
+                        self.assertEqual(count, result.errors[0].actual)
+
+    def test_description_limit_counts_utf16_units(self):
+        for count, exceeds in ((2000, False), (2001, True)):
+            with self.subTest(count=count):
+                result = self.result()
+                vm.validate_android_locale(
+                    result,
+                    "en-US",
+                    {"full_description": "😀" * count},
+                    source="unit",
+                    forbidden_terms=[],
+                )
+                errors = [i for i in result.errors if i.code == "chars_limit"]
+                self.assertEqual(exceeds, bool(errors))
+                if errors:
+                    self.assertEqual(count * 2, errors[0].actual)
 
     def test_apple_keyword_tokens_must_exceed_two_characters(self):
         result = self.result()

@@ -19,7 +19,8 @@ fail() { printf 'FAIL  %s\n' "$1"; FAIL=$((FAIL+1)); }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-EXPECTED_MCP_VERSION="1.4.2"
+# Local stdio setup only; hosted OAuth does not need Node.js or an API key.
+EXPECTED_MCP_VERSION="1.8.0"
 MCP_LIST_TIMEOUT_SECONDS=10
 
 run_with_timeout() {

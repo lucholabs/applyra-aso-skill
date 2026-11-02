@@ -27,6 +27,8 @@ Before changing metadata, tags, targeted pages, or creatives, save:
 - Tracked keywords and ranks
 - 30-day and 90-day rank histories
 - App visibility score history
+- ASO Health and axes, separately from observed visibility
+- Chart notes, detected app updates and store algorithm events returned with histories
 - Competitors and their visibility
 - Rating score and count
 - Relevant store analytics, when available
@@ -34,6 +36,20 @@ Before changing metadata, tags, targeted pages, or creatives, save:
 - Seasonality, campaigns, featuring, pricing, and release events
 
 Unknown live state must remain `unknown`; local files do not prove publication.
+
+Request only history the plan exposes: Free includes seven days. Record unavailable days explicitly instead of treating a short history as a complete 30/90-day baseline.
+
+## Notes and event comparisons
+
+Read `list_notes` and the `events` in visibility/rank histories to align campaigns, metadata changes, releases and algorithm updates. To record an event in Applyra, the user must authorize `add_note` or `update_note`; otherwise keep the local change log. Notes accept 1–120 characters and today or a past date. Supply the actual event day explicitly (the default is today in UTC), and select `scope: market` for a change specific to the resolved market or `app` for an app-wide event. Do not record a planned release as already published.
+
+Use the stable `note.id` for edits/removal, never its chart `number`: moving or deleting notes can renumber flags. `add_note` is not idempotent; check `list_notes` after an ambiguous timeout before retrying. `delete_note` requires specific authorization.
+
+For an observed change, call `compare_events` with the resolved app and optional `keyword_id`. Windows are `7`, `14` or `30` days on each side; Free supports only 7, while longer windows require Unlimited. The event day is excluded. Visibility gains have a positive change; rank improvements have a negative change because lower ranks are better. This tool counts an unranked day as #101 and reports `unranked_days`; disclose that convention rather than presenting it as an observed #101 rank.
+
+Read `measured_days`, `pending_days`, `hidden_days`, `history_start`, and `locked` before interpreting averages. Future days are pending and pre-plan days hidden, not zero. Read `alongside` for overlapping notes, releases and algorithm events. A before/after association does not establish causation; do not report an incomplete or locked comparison as a measured lift.
+
+Sources: [Notes and events](https://www.applyra.io/docs/applications/notes-and-events), [MCP event tool contracts](https://github.com/applyra-io/mcp-server).
 
 ## Change log
 

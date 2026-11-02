@@ -8,25 +8,33 @@
 
 Este [Agent Skill](https://agentskills.io/specification) standalone ayuda a
 Codex, Claude Code y agentes compatibles con investigación de keywords,
-rankings, competidores, metadata validada, localización, creatividades y planes
-de medición usando datos de Applyra.
+rankings, competidores, metadata validada, auditorías ASO Health, simulación de
+borradores, localización, creatividades y medición de cambios con notas y
+comparaciones de eventos usando datos de Applyra.
 
-Empieza en modo de solo lectura y no modifica Applyra, publica metadata ni
-ejecuta operaciones Git sin autorización explícita.
+Empieza en modo de solo lectura. La investigación puede consumir cuota y guardar
+historial; cambiar apps, keywords, competidores o notas, publicar metadata y
+ejecutar operaciones Git requiere autorización explícita.
 
 ## Requisitos
 
-- Node.js 20 o superior;
-- plan Unlimited de Applyra y `APPLYRA_API_KEY`;
-- `@applyra/mcp-server@1.4.2`.
+- una cuenta de Applyra: tanto Free como Unlimited permiten API/MCP;
+- OAuth remoto en `https://www.applyra.io/api/mcp`, o stdio local con Node.js 20+, `APPLYRA_API_KEY` y `@applyra/mcp-server@1.8.0`;
+- Python 3 para el validador de metadata incluido.
+
+Free incluye 50 peticiones API al mes y siete días de historial; cada llamada
+a una herramienta cuenta como una petición. Unlimited incluye 10.000 peticiones
+API al mes. La skill adapta lecturas e investigación al saldo real de la cuenta.
+Consulta los [planes y límites de Applyra](https://www.applyra.io/docs/account/plans-and-limits).
 
 ## Conseguir acceso a Applyra
 
 1. Antes de registrarte, [abre Applyra con el enlace referido de LuchoLabs](https://www.applyra.io/?ref=8BA10079167B)
    y crea tu cuenta desde allí.
-2. Pasa al plan **Unlimited** para habilitar el acceso API y MCP.
-3. Obtén `APPLYRA_API_KEY` desde tu cuenta de Applyra y continúa con la
-   instalación del skill y MCP que aparece debajo.
+2. Puedes empezar en **Free**, que ya incluye API y MCP. Unlimited es opcional
+   para mayores cuotas e historial.
+3. Conecta mediante OAuth remoto u obtén `APPLYRA_API_KEY` desde tu cuenta
+   para la instalación local de MCP que aparece debajo.
 
 > **Ventaja del referido:** obtienes un **50 % de descuento en tu primer mes de
 > Unlimited**. Si continúas durante el segundo mes, LuchoLabs recibe **un mes
@@ -98,6 +106,16 @@ carpeta a `.claude/skills/applyra-aso/` dentro de ese proyecto.
 
 ## Conectar Applyra MCP
 
+### OAuth remoto
+
+Añade `https://www.applyra.io/api/mcp` como servidor MCP remoto Streamable HTTP
+en un cliente compatible con OAuth e inicia sesión en Applyra. Esta opción no
+necesita Node.js ni una API key local. Puedes revocar las conexiones desde el
+[panel MCP de Applyra](https://www.applyra.io/dashboard/mcp). Consulta la
+[guía oficial de conexión](https://www.applyra.io/docs/api/mcp-server).
+
+### Stdio local
+
 Exporta la clave en el shell que abre el agente; nunca la guardes en Git:
 
 ```bash
@@ -109,7 +127,7 @@ Codex (`~/.codex/config.toml`):
 ```toml
 [mcp_servers.applyra]
 command = "npx"
-args = ["-y", "@applyra/mcp-server@1.4.2"]
+args = ["-y", "@applyra/mcp-server@1.8.0"]
 env_vars = ["APPLYRA_API_KEY"]
 ```
 
@@ -117,7 +135,7 @@ Claude Code:
 
 ```bash
 claude mcp add --transport stdio --scope user applyra -- \
-  npx -y @applyra/mcp-server@1.4.2
+  npx -y @applyra/mcp-server@1.8.0
 ```
 
 Abre Claude Code desde el shell donde exportaste la clave y comprueba `/mcp`.
@@ -128,7 +146,7 @@ clientes MCP, añade un servidor local **stdio** desde sus ajustes MCP:
 ```text
 nombre: applyra
 comando: npx
-argumentos: -y @applyra/mcp-server@1.4.2
+argumentos: -y @applyra/mcp-server@1.8.0
 variable de entorno: APPLYRA_API_KEY (heredada del shell que abre el cliente)
 ```
 
@@ -136,11 +154,17 @@ variable de entorno: APPLYRA_API_KEY (heredada del shell que abre el cliente)
 
 ```bash
 python3 applyra-aso/scripts/validate_metadata.py --self-test
+# Solo para stdio local; OAuth no necesita Node.js ni APPLYRA_API_KEY.
 bash applyra-aso/scripts/check_setup.sh
 ```
 
 Python solo ejecuta el validador determinista incluido; no es el instalador de
 Codex.
+
+La skill pasa a la versión **1.3.0**, revisada el **02-11-2026** con Applyra
+MCP **1.8.0** y la documentación pública actual. El validador de keywords iOS
+ahora aplica **100 caracteres**, con conteo UTF-16 y pruebas de límites con CJK
+y acentos, siguiendo la [guía de producto de Apple](https://developer.apple.com/app-store/product-page/).
 
 ## Actualizar o desinstalar
 
@@ -151,6 +175,11 @@ npx skills remove applyra-aso --global
 
 ## Documentación oficial
 
+- [Documentación de Applyra](https://www.applyra.io/docs)
+- [Applyra MCP: 30 herramientas](https://www.applyra.io/docs/api/mcp-tools)
+- [ASO Health de Applyra](https://www.applyra.io/docs/concepts/aso-health)
+- [Simulador de metadata de Applyra](https://www.applyra.io/docs/tools/metadata-simulator)
+- [Notas y eventos de Applyra](https://www.applyra.io/docs/applications/notes-and-events)
 - [OpenAI: crear skills](https://developers.openai.com/codex/skills)
 - [Claude Code: skills](https://code.claude.com/docs/en/skills)
 - [Cursor: Agent Skills](https://cursor.com/docs/skills)

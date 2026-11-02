@@ -8,11 +8,13 @@ Google can change fields, limits, targeting options, and policy. Re-check curren
 
 | Field | Limit |
 |---|---:|
-| Title | 30 Unicode characters |
-| Short description | 80 Unicode characters |
-| Full description | 4,000 Unicode characters |
+| Title | 30 UTF-16 code units |
+| Short description | 80 UTF-16 code units |
+| Full description | 4,000 UTF-16 code units |
 
 The current Android Publisher API listings schema exposes localized release notes but does not publish a universal hard character limit. The validator therefore does not fail release-note length by default. When a verified Play Console or delivery-tool limit applies, pass `--android-release-notes-limit <n>` explicitly.
+
+Character limits use UTF-16 code units, matching [Applyra’s metadata checker](https://www.applyra.io/docs/api/mcp-tools); a supplementary character such as an emoji takes two units. A count pass does not resolve policy warnings.
 
 ## Search mechanics
 

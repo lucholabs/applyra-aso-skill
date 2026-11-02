@@ -21,6 +21,13 @@
 | Metric | Store | Market | Value | Period | Source |
 |---|---|---|---:|---|---|
 
+## Listing health and simulated drafts
+
+| Market | Draft | ASO Health / axes | Context | Lost phrases | Decision |
+|---|---|---|---|---|---|
+
+Keep observed visibility, listing assessment, and simulated scores distinct.
+
 ## Keyword strategy
 
 | Cluster | Intent | Evidence | Bucket | Destination | Confidence |

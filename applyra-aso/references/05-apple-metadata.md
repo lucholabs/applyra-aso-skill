@@ -8,14 +8,14 @@ Apple can change fields, limits, availability, and product-page features. Re-che
 
 | Field | Limit |
 |---|---:|
-| App name | 2–30 Unicode characters |
-| Subtitle | 30 Unicode characters |
-| Keywords | 100 UTF-8 bytes |
-| Promotional text | 170 Unicode characters |
-| Description | 4,000 Unicode characters |
-| What's New | 4,000 Unicode characters |
+| App name | 2–30 UTF-16 code units |
+| Subtitle | 30 UTF-16 code units |
+| Keywords | 100 characters (UTF-16 code units) |
+| Promotional text | 170 UTF-16 code units |
+| Description | 4,000 UTF-16 code units |
+| What's New | 4,000 UTF-16 code units |
 
-Apple's keyword field is byte-limited. Non-ASCII locales can reach 100 bytes well before 100 visible characters.
+The keyword field allows 100 characters total, including commas and spaces, following [Apple’s product-page guide](https://developer.apple.com/app-store/product-page/) and Applyra’s checker. Count UTF-16 code units consistently across fields; do not apply a UTF-8-byte limit to CJK or accented keywords.
 
 ## App name
 
@@ -52,7 +52,7 @@ Avoid slogans that communicate no searchable meaning. Avoid repeating the exact 
 
 Rules:
 
-- Maximum 100 UTF-8 bytes.
+- Maximum 100 characters (UTF-16 code units).
 - Use comma-separated terms with no unnecessary spaces.
 - Remove exact duplicates.
 - Do not include the app name or company name when already indexed.
@@ -164,7 +164,7 @@ Research each priority market. A translated category phrase may not be the phras
 For each locale:
 
 - Preserve brand spelling.
-- Validate characters and keyword bytes.
+- Validate character limits, including keywords.
 - Check punctuation and script.
 - Confirm product availability and claims.
 - Mark keyword choices as data-backed or translation-only.
@@ -192,4 +192,4 @@ App tags, Custom Product Pages, and Product Page Optimization may live outside s
 
 ## Validation
 
-Run both manifest and repository-directory validation. Treat byte-limit errors as blockers. Treat duplicate/overlap warnings as decisions requiring explanation. Treat live tags, page status, approval state, and experiment state as `unknown` unless read from App Store Connect or a current export.
+Run both manifest and repository-directory validation. Treat character-limit errors as blockers. Treat duplicate/overlap warnings as decisions requiring explanation. Treat live tags, page status, approval state, and experiment state as `unknown` unless read from App Store Connect or a current export.

@@ -167,7 +167,7 @@ Decide at token and concept level:
 
 1. App name: brand plus the strongest truthful category/use-case signal that fits.
 2. Subtitle: secondary intent, differentiator, or concrete benefit.
-3. Keyword field: unique, relevant terms not already covered by name/subtitle/company; maximum 100 UTF-8 bytes.
+3. Keyword field: unique, relevant terms not already covered by name/subtitle/company; maximum 100 characters (UTF-16 code units).
 4. Description and promotional text: conversion and web-facing clarity, not a replacement for the indexed fields.
 
 Do not automatically use a keyword-first app name. Compare brand equity, uniqueness, conversion clarity, and search evidence.

@@ -63,7 +63,7 @@ Use a glossary for domain terms with one approved translation per locale.
 
 Run or manually verify:
 
-- Character/byte limits
+- Character limits using UTF-16 code units
 - Empty or duplicate fields
 - Placeholder parity
 - Format specifier parity
@@ -72,7 +72,7 @@ Run or manually verify:
 - Mixed-script contamination
 - Accidental source-language carryover
 - RTL direction and punctuation
-- CJK byte budget for Apple keywords
+- CJK character budget for Apple keywords
 - Untranslated brand atoms
 - Prohibited claims
 - Locale-to-country mismatch
@@ -90,6 +90,14 @@ For high-priority markets, obtain native or expert review of:
 - Call-to-action appropriateness
 
 Machine fluency is not proof of correct domain meaning.
+
+## Applyra translations
+
+Applyra's dashboard can translate market keywords and listing previews into the reader's language, and adapt typed keywords/drafts into the market's language. Use these as reading/drafting aids, preserving the original keyword, exact store/country/lang and metrics. A translated display label is not another market's measured query. Inspect the final local wording before calling it `data-backed`.
+
+The 30-tool MCP catalog does not expose a dedicated translation tool. Draft/adapt with the assistant and validate using the available research tools; do not invent a translation endpoint or assume a dashboard feature exists in MCP.
+
+Source: [Store translations, October 14](https://www.applyra.io/changelog/store-translations).
 
 ## Fallback behavior
 

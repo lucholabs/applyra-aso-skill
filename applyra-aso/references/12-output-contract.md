@@ -35,7 +35,9 @@ Suggested structure:
   "keywords": [],
   "competitors": [],
   "app_score_history": [],
+  "aso_health": null,
   "keyword_rank_histories": [],
+  "chart_events": null,
   "store_analytics": null,
   "notes": []
 }
@@ -69,6 +71,8 @@ Use the bundled template. Keep proposed and live state distinct.
 
 Include validator version, source paths, errors, warnings, and counts.
 
+When live checks/simulations are in scope, also write `docs/aso/metadata/simulation-comparison.json` with the market, draft, baseline, assumed context, ASO Health and per-axis deltas, check warnings, request notes, lost phrases, and decision. Preserve unavailable/null values and distinguish simulated scores from observed performance. Redact unnecessary saved-run IDs and private unrelated drafts. If unavailable, record the tool, allowance or context gap in the report.
+
 ### Store discovery surfaces
 
 `docs/aso/surfaces/store-surface-plan.json`
@@ -85,6 +89,8 @@ One table per store/market/locale/surface.
 
 - `docs/aso/experiments/experiment-plan.md`
 - `docs/aso/experiments/change-log.csv`
+
+For before/after analysis, include normalized `compare_events` results in `docs/aso/data/<date>/event-comparisons.json`: metric, window, actual available range, measured/pending/hidden days, unranked-day convention, concurrent events, and uncertainty. Redact private note content that is unnecessary for the decision.
 
 ### Audit report
 
@@ -112,6 +118,13 @@ One table per store/market/locale/surface.
 ## Baseline
 | Metric | Store | Market | Value | Period | Source |
 |---|---|---|---:|---|---|
+
+## Listing health and simulated drafts
+
+| Market | Draft | ASO Health / axes | Context | Lost phrases | Decision |
+|---|---|---|---|---|---|
+
+Keep observed visibility, listing assessment, and simulated scores distinct.
 
 ## Keyword strategy
 | Cluster | Intent | Evidence | Bucket | Destination | Confidence |

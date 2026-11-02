@@ -33,12 +33,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Mapping, Sequence
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 
 IOS_LIMITS = {
     "name": ("chars", 30),
     "subtitle": ("chars", 30),
-    "keywords": ("bytes", 100),
+    "keywords": ("chars", 100),
     "promotional_text": ("chars", 170),
     "description": ("chars", 4000),
     "whats_new": ("chars", 4000),
@@ -128,11 +128,8 @@ def normalized_term(value: str) -> str:
 
 
 def char_count(value: str) -> int:
-    return len(value)
-
-
-def utf8_bytes(value: str) -> int:
-    return len(value.encode("utf-8"))
+    # Store character counters use UTF-16 units; supplementary characters take two.
+    return len(value.encode("utf-16-le", errors="surrogatepass")) // 2
 
 
 def read_text(path: Path) -> str:
@@ -270,7 +267,7 @@ def validate_limit(
     limit: int,
     source: str,
 ) -> None:
-    actual = utf8_bytes(value) if unit == "bytes" else char_count(value)
+    actual = char_count(value)
     if actual > limit:
         add_issue(
             result,
@@ -481,7 +478,7 @@ def validate_ios_locale(
                 locale=locale,
                 field="keywords",
                 code="comma_space",
-                message="Keyword field contains spaces after commas, which consume the byte budget.",
+                message="Keyword field contains spaces after commas, which consume the character budget.",
                 source=source,
             )
         raw_tokens = [part.strip() for part in keywords.split(",")]
@@ -999,17 +996,19 @@ def run_self_test() -> int:
         print(f"Self-test failed; missing issue codes: {sorted(missing)}", file=sys.stderr)
         return 1
 
-    byte_result = ValidationResult(issues=[], sources=["self-test"])
-    validate_ios_locale(
-        byte_result,
-        "ja",
-        {"name": "テスト", "keywords": "語" * 34},
-        source="self-test",
-        forbidden_terms=[],
-    )
-    if not any(issue.code == "bytes_limit" for issue in byte_result.errors):
-        print("Self-test failed; UTF-8 byte limit was not detected.", file=sys.stderr)
-        return 1
+    for length in (100, 101):
+        keyword_result = ValidationResult(issues=[], sources=["self-test"])
+        validate_ios_locale(
+            keyword_result,
+            "ja",
+            {"name": "テスト", "keywords": "語" * length},
+            source="self-test",
+            forbidden_terms=[],
+        )
+        exceeds = any(issue.code == "chars_limit" for issue in keyword_result.errors)
+        if exceeds != (length > 100):
+            print("Self-test failed; keyword character limit is incorrect.", file=sys.stderr)
+            return 1
 
     print("Self-test passed.")
     return 0
